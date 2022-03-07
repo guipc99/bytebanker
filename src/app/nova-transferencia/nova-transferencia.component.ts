@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransferenciaService } from '../services/transferencia.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class NovaTransferenciaComponent implements OnInit {
   valor!: number;
   destino!: number;
 
-  constructor(private service: TransferenciaService) {}
+  constructor(private service: TransferenciaService, private router : Router) {}
 
   ngOnInit(): void {}
 
@@ -25,6 +26,7 @@ export class NovaTransferenciaComponent implements OnInit {
    this.service.adicionar(valorEmitir).subscribe(resultado =>{
      alert("Transferência realizada com sucesso!")
      this.limparCampos();
+     this.router.navigate(['extrato'])
    },
    (error) => console.error(error))
 
